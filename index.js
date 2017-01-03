@@ -2,7 +2,6 @@ var pos  = require('./build/Release/pos');
 var tty  = require('tty');
 var code = '\x1b[6n';
 
-
 function raw(mode) {
   if (process.stdin.setRawMode) {
     process.stdin.setRawMode(mode)
@@ -10,7 +9,6 @@ function raw(mode) {
     tty.setRawMode(mode)
   }
 }
-
 
 pos.async = function (callback, context) {
   if (process.platform === 'win32') {
@@ -52,7 +50,6 @@ pos.async = function (callback, context) {
   process.stdout.write(code);
   process.stdout.emit('data', code);
 };
-
 
 module.exports = pos;
 

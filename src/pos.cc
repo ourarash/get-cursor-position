@@ -3,13 +3,10 @@
 #include <stdio.h>
 #include <errno.h>
 
-
 using namespace v8;
-
 
 #ifdef _WIN32
 #include <windows.h>
-
 
 int cursor_position(int *const rowptr, int *const colptr)
 {
@@ -55,23 +52,16 @@ int cursor_position(int *const rowptr, int *const colptr)
 
 static inline int rd(const int fd)
 {
-    unsigned char   buffer[4];
-    ssize_t         n;
+    unsigned char  buffer[4];
+    ssize_t        n;
 
     while (1) {
         n = read(fd, buffer, 1);
 
-        if (n > (ssize_t)0)
-            return buffer[0];
-
-        else if (n == (ssize_t)0)
-            return RD_EOF;
-
-        else if (n != (ssize_t)-1)
-            return RD_EIO;
-
-        else if (errno != EINTR && errno != EAGAIN && errno != EWOULDBLOCK)
-            return RD_EIO;
+        if (n > (ssize_t)0)        return buffer[0];
+        else if (n == (ssize_t)0)  return RD_EOF;
+        else if (n != (ssize_t)-1) return RD_EIO;
+        else if (errno != EINTR && errno != EAGAIN && errno != EWOULDBLOCK) return RD_EIO;
     }
 }
 
@@ -85,14 +75,9 @@ static inline int wr(const int fd, const char *const data, const size_t bytes)
 
         n = write(fd, head, (size_t)(tail - head));
 
-        if (n > (ssize_t)0)
-            head += n;
-
-        else if (n != (ssize_t)-1)
-            return EIO;
-
-        else if (errno != EINTR && errno != EAGAIN && errno != EWOULDBLOCK)
-            return errno;
+        if (n > (ssize_t)0) head += n;
+        else if (n != (ssize_t)-1) return EIO;
+        else if (errno != EINTR && errno != EAGAIN && errno != EWOULDBLOCK) return errno;
     }
 
     return 0;
@@ -106,11 +91,9 @@ int current_tty(void)
 
     dev = ttyname(STDIN_FILENO);
 
-    if (!dev)
-        dev = ttyname(STDOUT_FILENO);
+    if (!dev) dev = ttyname(STDOUT_FILENO);
 
-    if (!dev)
-        dev = ttyname(STDERR_FILENO);
+    if (!dev) dev = ttyname(STDERR_FILENO);
 
     if (!dev) {
         errno = ENOTTY;
