@@ -231,6 +231,7 @@ int cursor_position(int *const rowptr, int *const colptr)
         retval = errno;
 
     /* Done. */
+    close(tty);
     return retval;
 }
 #endif
