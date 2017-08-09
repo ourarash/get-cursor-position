@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "pos",
-      "sources": [ "src/pos.cc" ]
+      "sources": [ "src/p.cc" ]
     }
   ]
 }
