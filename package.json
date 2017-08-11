@@ -1,6 +1,6 @@
 {
   "name": "get-cursor-position",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Get the cursor's current position in your terminal.",
   "main": "index.js",
   "scripts": {
