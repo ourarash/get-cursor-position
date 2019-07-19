@@ -258,7 +258,7 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
   	args.GetReturnValue().Set(pos);
 }
 
-void Init(void* exports) {
+void Init(Local<Object> exports) {
   Isolate* isolate = Isolate::GetCurrent();
   exports->Set(String::NewFromUtf8(isolate, "sync"),
       FunctionTemplate::New(isolate, Method)->GetFunction());
